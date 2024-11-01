@@ -31,3 +31,27 @@ card_list = list()
 for line in cards:
     if line.startswith('graphics'):
         card_list.append(line.strip())
+
+
+class START():
+    def __init__(self) -> None:
+        self.start_button_surf = pg.Surface((200, 75))
+        self.end_button_surf = pg.Surface((200, 75))
+        self.start_button_surf.fill(('green')), self.end_button_surf.fill(('red'))
+        self.start_button = self.start_button_surf.get_rect(center=(362.5, 300))
+        self.end_button = self.end_button_surf.get_rect(center=(362.5, 500))
+        self.start_text = font.render("start", True, black)
+        self.end_text = font.render("exit", True, white)
+        self.welcome_text = font.render("Welcome To Blackjack!", True, white)
+
+        self.starting = False
+        self.exitting = False
+
+    def run(self, surface):
+        surface.blit(self.start_button_surf, self.start_button)
+        surface.blit(self.end_button_surf, self.end_button)
+        surface.blit(self.start_text, (327.5, 288.5))
+        surface.blit(self.end_text, (337.5, 488.5))
+        surface.blit(self.welcome_text, (SCREEN_WIDTH/2 - 160, 50))
+
+
