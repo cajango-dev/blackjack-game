@@ -55,3 +55,33 @@ class START():
         surface.blit(self.welcome_text, (SCREEN_WIDTH/2 - 160, 50))
 
 
+class PLAYER(pg.sprite.Sprite):
+    def __init__(self) -> None:
+        super().__init__()
+        self.card_pos_x = SCREEN_WIDTH/2 - 132
+        self.card_pos_y = SCREEN_HEIGHT + - 32.5
+
+        self.group = pg.sprite.Group()
+        self.value_lst = list()
+        self.total = 0
+
+        self.hit_button_surf = pg.Surface((75, 50))
+        self.pass_button_surf = pg.Surface((75, 50))
+        self.hit_button_surf.fill(('green')), self.pass_button_surf.fill(('red'))
+        self.hit = self.hit_button_surf.get_rect(center=(550, 650))
+        self.passes = self.pass_button_surf.get_rect(center=(150, 650))
+
+        self.hit_text = font.render("hit", True, black)
+        self.pass_text = font.render("pass", True, white)
+
+        self.passed = False
+
+    def create_card(self, side, player_team):
+        self.card_pos_x += 50
+        return CARD(random.choice(card_list), (self.card_pos_x, self.card_pos_y), side, player_team)
+
+    def options(self, surface):
+        surface.blit(self.hit_button_surf, self.hit)
+        surface.blit(self.pass_button_surf, self.passes)
+        surface.blit(self.hit_text, (532.5, 632.5))
+        surface.blit(self.pass_text, (115, 632.5))
